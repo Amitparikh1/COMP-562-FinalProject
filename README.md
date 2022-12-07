@@ -1,7 +1,7 @@
 # Predicting Academic Success Using Multiple Classifier Models
 `COMP 562 Fall 2022 Final Project`
 
-Authors: Amit Parikh, Ernest Ermongkonchai, Kaan Nymaan, Luke Schmidt 
+Authors: Amit Parikh, Ernest Ermongkonchai, Kaan Nymaan, Luke Schmidt, Aryaman Agrawal
 
 ## Abstract
 
