@@ -117,9 +117,9 @@ Since our data has simple information about the students' lives in Portugal, our
 %------------------------------------------------
 
 \section{Methods}
+
 \subsection{Preparing and Exploring the Data}
 The general framework of steps that we took are listed below, separated under three primary categories: Preparing \& Exploring the Data, Building the Classifier Models, and Evaluating Model Results. 
-
 \begin{enumerate}
 	\item We downloaded the Portuguese.csv file from Kaggle and read it into our notebook
 	\item Calculated the median final grade among students in our dataset
@@ -129,11 +129,66 @@ The general framework of steps that we took are listed below, separated under th
 	\item Visualized the distributions and covariance matrix of our selected features to ensure the input data was statistically sound and had low multi-collinearity
 	\item Split the data into training and testing sets using a 75/25 split. It is industry standard, and is a good split to avoid overfitting
 \end{enumerate}
+
 \subsection{Building the Classifier Models}
+These general steps were applied to each of the three classification models we compared:
+\begin{enumerate}
+	\item Create classification model object (Logistic Regression, Random Forest, or KNN)
+	\item Build a grid of hyper-parameters and tune these during Cross Validation
+	\item Fit the model using the X and y training data
+\end {enumerate}
+
 \subsection{Evaluating Model Results}
+These general steps were applied to each of the three classification models we compared:
+\begin{enumerate}
+	\item Make predictions using each of the trained models
+	\item Calculate accuracy of predictions using the Jaccard similarity index for in and out of sample data
+	\item Model predictions into a confusion matrix to better understand the strengths and weaknesses of our model’s predictive power
+	\item Find feature importance of our finalized model to analyze and interpret the meaning from our model
+\end {enumerate}
 
-Text requiring further explanation\footnote{Example footnote}.
+%Text requiring further explanation\footnote{Example footnote}.
 
+%------------------------------------------------
+
+\section{Building the Model}
+Once our Kaggle dataset is loaded, we utilize several classifier models to predict students’ performance in the classroom. We will test three different models in order to compare the accuracy of each and find a better solution for our prediction. 
+\\ \\
+After training each of our models with the full dataset containing 30 features (including birth, sex, housing, etc.), we realized that this would cause our final prediction to overfit our training data. This is because we saw that some variables were highly correlated with each other from calculating a covariance matrix with all 30 features. With this information at hand, we were able to use a feature selection algorithm that removed half of the unneeded correlated features. This was done by taking the top 15 features by their ANOVA F-value. Making this adjustment significantly improved our prediction accuracy as indicated by our confusion matrix.
+\subsection{Logistic Regression}
+\subsection{Random Forrest Classifier}
+\subsection{KNN Classifier}
+%------------------------------------------------
+
+\section{Results}
+The random forest classifier was found to be the most accurate machine learning model we trained, achieving an accuracy rate of 74.8\% on our validation set and 76.5\% on our training set. 748\% was the highest out-of-sample accuracy rate in comparison to other models such as logistic regression (72.3\%), and k nearest neighbors (68.7\%).
+\\ \\
+The results of the confusion matrix showed that while the random forest classifier was able to accurately measure and predict positive cases, it was not as successful in accurately predicting and measuring negative cases. This suggests that further fine-tuning and optimization of the model may be necessary in order to improve its accuracy in negative cases as the false positives is as high as 35.
+\\ \\
+The most important factor in predicting student performance, as determined by the mean decrease in impurity (MDI) method, was found to be failing a prior class. This was followed by seeking higher education, mother's education and job, school, weekly study time, father's education, and internet access, among other factors. Collectively, these were judged to be the most influential components of student performance.
+
+%------------------------------------------------
+
+\section{Conclusion}
+Our study utilized a confined and niche dataset, but the algorithm and results are widely applicable. While our general framework could be applied to other scenarios, we cannot use the same set of features for just any country or subject. This is because academic performance is also reliant on factors such as culture and importance placed on academics in other countries. Our study can be enhanced by coming up with new feature sets and using the results to compare and contrast different cultures and the emphasis they place on academics. This allows us to gain a better understanding of how academic importance varies throughout the world.
+
+%----------------------------------------------------------------------------------------
+%	REFERENCE LIST
+%----------------------------------------------------------------------------------------
+
+\begin{thebibliography}{99} % Bibliography - this is intentionally simple in this template
+
+\bibitem[Figueredo and Wolf, 2009]{Figueredo:2009dg}
+Figueredo, A.~J. and Wolf, P. S.~A. (2009).
+\newblock Assortative pairing and life history strategy - a cross-cultural
+  study.
+\newblock {\em Human Nature}, 20:317--330.
+ 
+\end{thebibliography}
+
+%----------------------------------------------------------------------------------------
+%------------------------------------------------
+% EXTRA
 %------------------------------------------------
 
 \section{Results}
@@ -175,33 +230,6 @@ A statement requiring citation \cite{Figueredo:2009dg}.
 
 \blindtext % Dummy text
 %------------------------------------------------
-
-\section{Results}
-The random forest classifier was found to be the most accurate machine learning model we trained, achieving an accuracy rate of 74.8\% on our validation set and 76.5\% on our training set. 748\% was the highest out-of-sample accuracy rate in comparison to other models such as logistic regression (72.3\%), and k nearest neighbors (68.7\%).
-
-The results of the confusion matrix showed that while the random forest classifier was able to accurately measure and predict positive cases, it was not as successful in accurately predicting and measuring negative cases. This suggests that further fine-tuning and optimization of the model may be necessary in order to improve its accuracy in negative cases as the false positives is as high as 35.
-
-The most important factor in predicting student performance, as determined by the mean decrease in impurity (MDI) method, was found to be failing a prior class. This was followed by seeking higher education, mother's education and job, school, weekly study time, father's education, and internet access, among other factors. Collectively, these were judged to be the most influential components of student performance.
-
+% EXTRA
 %------------------------------------------------
-
-\section{Conclusion}
-Our study utilized a confined and niche dataset, but the algorithm and results are widely applicable. While our general framework could be applied to other scenarios, we cannot use the same set of features for just any country or subject. This is because academic performance is also reliant on factors such as culture and importance placed on academics in other countries. Our study can be enhanced by coming up with new feature sets and using the results to compare and contrast different cultures and the emphasis they place on academics. This allows us to gain a better understanding of how academic importance varies throughout the world.
-
-%----------------------------------------------------------------------------------------
-%	REFERENCE LIST
-%----------------------------------------------------------------------------------------
-
-\begin{thebibliography}{99} % Bibliography - this is intentionally simple in this template
-
-\bibitem[Figueredo and Wolf, 2009]{Figueredo:2009dg}
-Figueredo, A.~J. and Wolf, P. S.~A. (2009).
-\newblock Assortative pairing and life history strategy - a cross-cultural
-  study.
-\newblock {\em Human Nature}, 20:317--330.
- 
-\end{thebibliography}
-
-%----------------------------------------------------------------------------------------
-
 \end{document}
