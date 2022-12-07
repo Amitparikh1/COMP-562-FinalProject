@@ -1,22 +1,5 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Journal Article
-% LaTeX Template
-% Version 1.4 (15/5/16)
-%
-% This template has been downloaded from:
-% http://www.LaTeXTemplates.com
-%
-% Original author:
-% Frits Wenneker (http://www.howtotex.com) with extensive modifications by
-% Vel (vel@LaTeXTemplates.com)
-%
-% License:
-% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 %----------------------------------------------------------------------------------------
-%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%	COMP 562 Fall 2022 Final Project
 %----------------------------------------------------------------------------------------
 
 \documentclass[twoside,twocolumn]{article}
@@ -69,7 +52,7 @@
 \pretitle{\begin{center}\Huge\bfseries} % Article title formatting
 \posttitle{\end{center}} % Article title closing formatting
 \title{Predicting Academic Success Using Multiple Classifier Models} % Article title
-\author{%
+\author{% author
 \textsc{Amit Parikh} \\[1ex] %\thanks{Corresponding author} \\[1ex] % Your name
 \normalsize University of North Carolina at Chapel Hill \\ % Your institution
 \normalsize \href{mailto:john@smith.com}{asparikh@live.unc.edu} % Your email address
@@ -100,7 +83,6 @@
 %----------------------------------------------------------------------------------------
 
 \begin{document}
-
 % Print the title
 \maketitle
 
@@ -116,7 +98,7 @@ Since our data has simple information about the students' lives in Portugal, our
 
 %------------------------------------------------
 
-\section{Methods}
+\section{Framework}
 
 \subsection{Preparing and Exploring the Data}
 The general framework of steps that we took are listed below, separated under three primary categories: Preparing \& Exploring the Data, Building the Classifier Models, and Evaluating Model Results. 
@@ -127,7 +109,7 @@ The general framework of steps that we took are listed below, separated under th
 	\item Encoded all categorical features as numeric using one-hot encoding 
 	\item Selected the top 15 features by their ANOVA F-value, eliminating features that were not relevant to the model
 	\item Visualized the distributions and covariance matrix of our selected features to ensure the input data was statistically sound and had low multi-collinearity
-	\item Split the data into training and testing sets using a 75/25 split. It is industry standard, and is a good split to avoid overfitting
+	\item Split the data into training and testing sets using a 75/25 split. It is industry standard, and is a good split to avoid over-fitting
 \end{enumerate}
 
 \subsection{Building the Classifier Models}
@@ -143,6 +125,8 @@ These general steps were applied to each of the three classification models we c
 \begin{enumerate}
 	\item Make predictions using each of the trained models
 	\item Calculate accuracy of predictions using the Jaccard similarity index for in and out of sample data
+\\ \\
+(Equation here ... )
 	\item Model predictions into a confusion matrix to better understand the strengths and weaknesses of our model’s predictive power
 	\item Find feature importance of our finalized model to analyze and interpret the meaning from our model
 \end {enumerate}
@@ -156,8 +140,29 @@ Once our Kaggle dataset is loaded, we utilize several classifier models to predi
 \\ \\
 After training each of our models with the full dataset containing 30 features (including birth, sex, housing, etc.), we realized that this would cause our final prediction to overfit our training data. This is because we saw that some variables were highly correlated with each other from calculating a covariance matrix with all 30 features. With this information at hand, we were able to use a feature selection algorithm that removed half of the unneeded correlated features. This was done by taking the top 15 features by their ANOVA F-value. Making this adjustment significantly improved our prediction accuracy as indicated by our confusion matrix.
 \subsection{Logistic Regression}
+The purpose of using the logistic regression model is to have a baseline classification model which is simple to implement and an effective way to check whether other models meet the performance and accuracy expectations.
+\\ \\
+A logistic model takes the multiple features and uses a sigmoid function to squash the results into the [0, 1] range. This is an example of binary logistic regression which will be able to predict an above-average grade (1) and a below-average grade (0), where the parameters are:
+\\ \\
+(Equation here ... )
+\\ \\
+From this new equation, we finish off the model by calculating the minimum of the gradient descent function which will give us our prediction model. With this method, we were able to get an accuracy of about 72.3\%. 
+
 \subsection{Random Forrest Classifier}
+Random Forest is one of the most popular and powerful classification algorithms because of its similarity to human-like thinking which leads to high intuition and interpretability.
+\\ \\
+A Random Forest classifier is an ensembling technique consisting of many decision trees. It builds an independent set of trees which classify inputs by voting on outcomes - an approach that is more accurate than individual trees. 
+Our Random Forest classifier was able to achieve an accuracy of about 
+
 \subsection{KNN Classifier}
+The purpose of using the KNN model, just like the Logistic Regression, is for its simplicity and accuracy and is an effective way to check the other models.
+\\ \\
+(Equation here ... )
+\\ \\
+A KNN classifier is a supervised learning classifier, which uses proximity to make classifications or predictions about the grouping of individual data points. This model works off the assumption that similar points are in close proximity to each other.
+\\ \\
+...
+
 %------------------------------------------------
 
 \section{Results}
@@ -191,44 +196,44 @@ Figueredo, A.~J. and Wolf, P. S.~A. (2009).
 % EXTRA
 %------------------------------------------------
 
-\section{Results}
-
-\begin{table}
-\caption{Example table}
-\centering
-\begin{tabular}{llr}
-\toprule
-\multicolumn{2}{c}{Name} \\
-\cmidrule(r){1-2}
-First name & Last Name & Grade \\
-\midrule
-John & Doe & $7.5$ \\
-Richard & Miles & $2$ \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\blindtext % Dummy text
-
-\begin{equation}
-\label{eq:emc}
-e = mc^2
-\end{equation}
-
-\blindtext % Dummy text
-
-%------------------------------------------------
-
-\section{Discussion}
-
-\subsection{Subsection One}
-
-A statement requiring citation \cite{Figueredo:2009dg}.
-\blindtext % Dummy text
-
-\subsection{Subsection Two}
-
-\blindtext % Dummy text
+%\section{Results}
+%
+%\begin{table}
+%\caption{Example table}
+%\centering
+%\begin{tabular}{llr}
+%\toprule
+%\multicolumn{2}{c}{Name} \\
+%\cmidrule(r){1-2}
+%First name & Last Name & Grade \\
+%\midrule
+%John & Doe & $7.5$ \\
+%Richard & Miles & $2$ \\
+%\bottomrule
+%\end{tabular}
+%\end{table}
+%
+%\blindtext % Dummy text
+%
+%\begin{equation}
+%\label{eq:emc}
+%e = mc^2
+%\end{equation}
+%
+%\blindtext % Dummy text
+%
+%%------------------------------------------------
+%
+%\section{Discussion}
+%
+%\subsection{Subsection One}
+%
+%A statement requiring citation \cite{Figueredo:2009dg}.
+%\blindtext % Dummy text
+%
+%\subsection{Subsection Two}
+%
+%\blindtext % Dummy text
 %------------------------------------------------
 % EXTRA
 %------------------------------------------------
