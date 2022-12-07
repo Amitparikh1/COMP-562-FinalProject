@@ -92,9 +92,9 @@
 
 \section{Introduction}
 \subsection{The Data}
-\lettrine[nindent=0em,lines=3] {T}he data set used for our research comes from Kaggle and contains information on 650 students about their personal lives and their grades in their Portuguese class. For our model we decided to use a Feature Selection algorithm and ended up using the following features in our model: School they went to, Sex, Address, Mothers education, Fathers education, Mother’s job, Reason for choosing this school, Travel time to school, Study time, Number of failed classes, Amount of higher education classes, Time on internet, School-day alcohol consumption, Weekend alcohol consumption, and Absences. The data set was created by Paulo Cortez in the UCI Machine Learning Repository. Each student can only be classified as an above-average student or a below-average student.
+\lettrine[nindent=0em,lines=3] {T}he data set used for our research comes from Kaggle and contains information on 650 students in regards to their personal lives and their grades in their Portuguese class. For our model we decided to use a Feature Selection algorithm and ended up using the following features in our model: ‘School’, ‘Sex’, ‘Address’, ‘Mother’s Education’, ‘Father’s Education’, ‘Mother’s Job’, ‘Reason for Choosing School’, ‘Travel Time to School’, ‘Study Time’, ‘Number of Failed Classes’, ‘Amount of Higher Education Classes’, ‘Internet Access’, ‘Schoolday Alcohol Consumption’, ‘Weekend Alcohol Consumption, and Absences’. The data set was created by Paulo Cortez in the UCI Machine Learning Repository. Each student is binarily classified as an above-average student or a below-average student.
 \subsection{Implications}
-Since our data has simple information about the students' lives in Portugal, our research can be applied to many different school districts and classes across Portugal. We can especially use our research to find feature importance according to Portuguese culture. Teachers in these school districts could use this model to keep an eye out for students who are potentially going to be below average.
+Our research can be applied to many different school districts and classes across Portugal, providing insight into the feature importance in Portuguese culture. Teachers in these districts can use this model to identify students who may be at risk of under-performance, allowing them to proactively provide the necessary support.
 
 %------------------------------------------------
 
@@ -125,8 +125,10 @@ These general steps were applied to each of the three classification models we c
 \begin{enumerate}
 	\item Make predictions using each of the trained models
 	\item Calculate accuracy of predictions using the Jaccard similarity index for in and out of sample data
-\\ \\
-(Equation here ... )
+	\begin{equation}
+	\label{eq:emc}
+	J(A,B) = |AnB|/|AuB|
+	\end{equation}
 	\item Model predictions into a confusion matrix to better understand the strengths and weaknesses of our model’s predictive power
 	\item Find feature importance of our finalized model to analyze and interpret the meaning from our model
 \end {enumerate}
@@ -139,6 +141,7 @@ These general steps were applied to each of the three classification models we c
 Once our Kaggle dataset is loaded, we utilize several classifier models to predict students’ performance in the classroom. We will test three different models in order to compare the accuracy of each and find a better solution for our prediction. 
 \\ \\
 After training each of our models with the full dataset containing 30 features (including birth, sex, housing, etc.), we realized that this would cause our final prediction to overfit our training data. This is because we saw that some variables were highly correlated with each other from calculating a covariance matrix with all 30 features. With this information at hand, we were able to use a feature selection algorithm that removed half of the unneeded correlated features. This was done by taking the top 15 features by their ANOVA F-value. Making this adjustment significantly improved our prediction accuracy as indicated by our confusion matrix.
+
 \subsection{Logistic Regression}
 The purpose of using the logistic regression model is to have a baseline classification model which is simple to implement and an effective way to check whether other models meet the performance and accuracy expectations.
 \\ \\
@@ -146,13 +149,14 @@ A logistic model takes the multiple features and uses a sigmoid function to squa
 \\ \\
 (Equation here ... )
 \\ \\
-From this new equation, we finish off the model by calculating the minimum of the gradient descent function which will give us our prediction model. With this method, we were able to get an accuracy of about 72.3\%. 
+From cross validation we found that the optimal hyperparameters are C = 1 and a penalty = none. C tells the model how much weight to give to the training data and the penalty hurts models with more variables if present.
 
 \subsection{Random Forrest Classifier}
 Random Forest is one of the most popular and powerful classification algorithms because of its similarity to human-like thinking which leads to high intuition and interpretability.
 \\ \\
 A Random Forest classifier is an ensembling technique consisting of many decision trees. It builds an independent set of trees which classify inputs by voting on outcomes - an approach that is more accurate than individual trees. 
-Our Random Forest classifier was able to achieve an accuracy of about 
+\\ \\
+Cross validation yielded an optimal max depth of 3 and 166 for n\_estimators. The max depth represents the number of splits the model can make. N\_estimators is the number of trees to build before averaging the predictions. 
 
 \subsection{KNN Classifier}
 The purpose of using the KNN model, just like the Logistic Regression, is for its simplicity and accuracy and is an effective way to check the other models.
@@ -161,12 +165,14 @@ The purpose of using the KNN model, just like the Logistic Regression, is for it
 \\ \\
 A KNN classifier is a supervised learning classifier, which uses proximity to make classifications or predictions about the grouping of individual data points. This model works off the assumption that similar points are in close proximity to each other.
 \\ \\
-...
+(Equation here...)
+\\ \\
+Using the Minkowski distance formula used above for the data points and cross validation, the optimal number of nearest neighbors to use was found to be 14. 
 
 %------------------------------------------------
 
 \section{Results}
-The random forest classifier was found to be the most accurate machine learning model we trained, achieving an accuracy rate of 74.8\% on our validation set and 76.5\% on our training set. 748\% was the highest out-of-sample accuracy rate in comparison to other models such as logistic regression (72.3\%), and k nearest neighbors (68.7\%).
+The random forest classifier was found to be the most accurate machine learning model we trained, achieving an accuracy rate of 74.8\% on our validation set and 76.5\% on our training set. 74.8\% was the highest out-of-sample accuracy rate in comparison to other models such as logistic regression (72.3\%), and k nearest neighbors (68.7\%).
 \\ \\
 The results of the confusion matrix showed that while the random forest classifier was able to accurately measure and predict positive cases, it was not as successful in accurately predicting and measuring negative cases. This suggests that further fine-tuning and optimization of the model may be necessary in order to improve its accuracy in negative cases as the false positives is as high as 35.
 \\ \\
