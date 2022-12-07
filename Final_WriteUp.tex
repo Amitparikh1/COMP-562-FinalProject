@@ -111,25 +111,26 @@
 \section{Introduction}
 \subsection{The Data}
 \lettrine[nindent=0em,lines=3] {T}he data set used for our research comes from Kaggle and contains information on 650 students about their personal lives and their grades in their Portuguese class. For our model we decided to use a Feature Selection algorithm and ended up using the following features in our model: School they went to, Sex, Address, Mothers education, Fathers education, Mother’s job, Reason for choosing this school, Travel time to school, Study time, Number of failed classes, Amount of higher education classes, Time on internet, School-day alcohol consumption, Weekend alcohol consumption, and Absences. The data set was created by Paulo Cortez in the UCI Machine Learning Repository. Each student can only be classified as an above-average student or a below-average student.
-
 \subsection{Implications}
-\lettrine[nindent=0em,lines=3] The data set used for our research comes from Kaggle and contains information on 650 students about their personal lives and their grades in their Portuguese class. For our model we decided to use a Feature Selection algorithm and ended up using the following features in our model: School they went to, Sex, Address, Mothers education, Fathers education, Mother’s job, Reason for choosing this school, Travel time to school, Study time, Number of failed classes, Amount of higher education classes, Time on internet, School-day alcohol consumption, Weekend alcohol consumption, and Absences. The data set was created by Paulo Cortez in the UCI Machine Learning Repository. Each student can only be classified as an above-average student or a below-average student.
+Since our data has simple information about the students' lives in Portugal, our research can be applied to many different school districts and classes across Portugal. We can especially use our research to find feature importance according to Portuguese culture. Teachers in these school districts could use this model to keep an eye out for students who are potentially going to be below average.
 
 %------------------------------------------------
 
 \section{Methods}
+\subsection{Preparing and Exploring the Data}
+The general framework of steps that we took are listed below, separated under three primary categories: Preparing \& Exploring the Data, Building the Classifier Models, and Evaluating Model Results. 
 
-Maecenas sed ultricies felis. Sed imperdiet dictum arcu a egestas. 
-\begin{itemize}
-\item Donec dolor arcu, rutrum id molestie in, viverra sed diam
-\item Curabitur feugiat
-\item turpis sed auctor facilisis
-\item arcu eros accumsan lorem, at posuere mi diam sit amet tortor
-\item Fusce fermentum, mi sit amet euismod rutrum
-\item sem lorem molestie diam, iaculis aliquet sapien tortor non nisi
-\item Pellentesque bibendum pretium aliquet
-\end{itemize}
-\blindtext % Dummy text
+\begin{enumerate}
+	\item We downloaded the Portuguese.csv file from Kaggle and read it into our notebook
+	\item Calculated the median final grade among students in our dataset
+	\item Used this median to create a binary target variable representing if a student earns an above or below average grade
+	\item Encoded all categorical features as numeric using one-hot encoding 
+	\item Selected the top 15 features by their ANOVA F-value, eliminating features that were not relevant to the model
+	\item Visualized the distributions and covariance matrix of our selected features to ensure the input data was statistically sound and had low multi-collinearity
+	\item Split the data into training and testing sets using a 75/25 split. It is industry standard, and is a good split to avoid overfitting
+\end{enumerate}
+\subsection{Building the Classifier Models}
+\subsection{Evaluating Model Results}
 
 Text requiring further explanation\footnote{Example footnote}.
 
@@ -173,6 +174,19 @@ A statement requiring citation \cite{Figueredo:2009dg}.
 \subsection{Subsection Two}
 
 \blindtext % Dummy text
+%------------------------------------------------
+
+\section{Results}
+The random forest classifier was found to be the most accurate machine learning model we trained, achieving an accuracy rate of 74.8\% on our validation set and 76.5\% on our training set. 748\% was the highest out-of-sample accuracy rate in comparison to other models such as logistic regression (72.3\%), and k nearest neighbors (68.7\%).
+
+The results of the confusion matrix showed that while the random forest classifier was able to accurately measure and predict positive cases, it was not as successful in accurately predicting and measuring negative cases. This suggests that further fine-tuning and optimization of the model may be necessary in order to improve its accuracy in negative cases as the false positives is as high as 35.
+
+The most important factor in predicting student performance, as determined by the mean decrease in impurity (MDI) method, was found to be failing a prior class. This was followed by seeking higher education, mother's education and job, school, weekly study time, father's education, and internet access, among other factors. Collectively, these were judged to be the most influential components of student performance.
+
+%------------------------------------------------
+
+\section{Conclusion}
+Our study utilized a confined and niche dataset, but the algorithm and results are widely applicable. While our general framework could be applied to other scenarios, we cannot use the same set of features for just any country or subject. This is because academic performance is also reliant on factors such as culture and importance placed on academics in other countries. Our study can be enhanced by coming up with new feature sets and using the results to compare and contrast different cultures and the emphasis they place on academics. This allows us to gain a better understanding of how academic importance varies throughout the world.
 
 %----------------------------------------------------------------------------------------
 %	REFERENCE LIST
