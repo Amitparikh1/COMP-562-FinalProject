@@ -5,7 +5,7 @@
 \documentclass[twoside,twocolumn]{article}
 
 \usepackage{blindtext} % Package to generate dummy text throughout this template 
-
+\usepackage{graphicx}
 \usepackage[sc]{mathpazo} % Use the Palatino font
 \usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
 \linespread{1.05} % Line spacing - Palatino needs more space between lines
@@ -92,7 +92,9 @@
 
 \section{Introduction}
 \subsection{The Data}
-\lettrine[nindent=0em,lines=3] {T}he data set used for our research comes from Kaggle and contains information on 650 students in regards to their personal lives and their grades in their Portuguese class. For our model we decided to use a Feature Selection algorithm and ended up using the following features in our model: ‘School’, ‘Sex’, ‘Address’, ‘Mother’s Education’, ‘Father’s Education’, ‘Mother’s Job’, ‘Reason for Choosing School’, ‘Travel Time to School’, ‘Study Time’, ‘Number of Failed Classes’, ‘Amount of Higher Education Classes’, ‘Internet Access’, ‘Schoolday Alcohol Consumption’, ‘Weekend Alcohol Consumption, and Absences’. The data set was created by Paulo Cortez in the UCI Machine Learning Repository. Each student is binarily classified as an above-average student or a below-average student.
+\lettrine[nindent=0em,lines=3] {T}he data set used for our research comes from Kaggle and contains information on 650 students in regards to their personal lives and their grades in their Portuguese class. For our model we decided to use a Feature Selection algorithm and ended up using the following features in our model: ‘School’, ‘Sex’, ‘Address’, ‘Mother’s Education’, ‘Father’s Education’, ‘Mother’s Job’, ‘Reason for Choosing School’, ‘Travel Time to School’, ‘Study Time’, ‘Number of Failed Classes’, ‘Amount of Higher Education Classes’, ‘Internet Access’, ‘Schoolday Alcohol Consumption’, ‘Weekend Alcohol Consumption, and Absences’.
+\\ \\
+The data set was created by Paulo Cortez in the UCI Machine Learning Repository. Each student is binarily classified as an above-average student or a below-average student.
 \subsection{Implications}
 Our research can be applied to many different school districts and classes across Portugal, providing insight into the feature importance in Portuguese culture. Teachers in these districts can use this model to identify students who may be at risk of under-performance, allowing them to proactively provide the necessary support.
 
@@ -127,7 +129,7 @@ These general steps were applied to each of the three classification models we c
 	\item Calculate accuracy of predictions using the Jaccard similarity index for in and out of sample data
 	\begin{equation}
 	\label{eq:emc}
-	J(A,B) = |AnB|/|AuB|
+	J(A,B) = \frac{|{A}\cap{B}|}{|{A}\cup{B}|}
 	\end{equation}
 	\item Model predictions into a confusion matrix to better understand the strengths and weaknesses of our model’s predictive power
 	\item Find feature importance of our finalized model to analyze and interpret the meaning from our model
@@ -147,7 +149,7 @@ The purpose of using the logistic regression model is to have a baseline classif
 \\ \\
 A logistic model takes the multiple features and uses a sigmoid function to squash the results into the [0, 1] range. This is an example of binary logistic regression which will be able to predict an above-average grade (1) and a below-average grade (0), where the parameters are:
 \\ \\
-(Equation here ... )
+$p(y|\textbf{x},\beta_{0},\beta)=\frac{1}{1+exp\{-y(\beta_{0}+\textbf{x}^T\beta)\}}$
 \\ \\
 From cross validation we found that the optimal hyperparameters are C = 1 and a penalty = none. C tells the model how much weight to give to the training data and the penalty hurts models with more variables if present.
 
@@ -161,11 +163,9 @@ Cross validation yielded an optimal max depth of 3 and 166 for n\_estimators. Th
 \subsection{KNN Classifier}
 The purpose of using the KNN model, just like the Logistic Regression, is for its simplicity and accuracy and is an effective way to check the other models.
 \\ \\
-(Equation here ... )
-\\ \\
 A KNN classifier is a supervised learning classifier, which uses proximity to make classifications or predictions about the grouping of individual data points. This model works off the assumption that similar points are in close proximity to each other.
 \\ \\
-(Equation here...)
+$D(X,Y)=(\sum_{i=1}^{n}|x_i-y_i|^p)^{\frac{1}{p}}$
 \\ \\
 Using the Minkowski distance formula used above for the data points and cross validation, the optimal number of nearest neighbors to use was found to be 14. 
 
@@ -173,28 +173,36 @@ Using the Minkowski distance formula used above for the data points and cross va
 
 \section{Results}
 The random forest classifier was found to be the most accurate machine learning model we trained, achieving an accuracy rate of 74.8\% on our validation set and 76.5\% on our training set. 74.8\% was the highest out-of-sample accuracy rate in comparison to other models such as logistic regression (72.3\%), and k nearest neighbors (68.7\%).
+\begin{figure}
+  \includegraphics[width=\linewidth]{confusion_matrix.png}
+  \caption{Confusion matrix for Random Forest Model}
+  \label{fig:matrix}
+\end{figure}
+%Figure \ref{fig:matrix} shows a boat.
 \\ \\
 The results of the confusion matrix showed that while the random forest classifier was able to accurately measure and predict positive cases, it was not as successful in accurately predicting and measuring negative cases. This suggests that further fine-tuning and optimization of the model may be necessary in order to improve its accuracy in negative cases as the false positives is as high as 35.
 \\ \\
 The most important factor in predicting student performance, as determined by the mean decrease in impurity (MDI) method, was found to be failing a prior class. This was followed by seeking higher education, mother's education and job, school, weekly study time, father's education, and internet access, among other factors. Collectively, these were judged to be the most influential components of student performance.
-
+\begin{figure}
+  \includegraphics[width=\linewidth]{importance.png}
+  \caption{Feature Importances Using MDI}
+  \label{fig:imp}
+\end{figure}
 %------------------------------------------------
 
 \section{Conclusion}
-Our study utilized a confined and niche dataset, but the algorithm and results are widely applicable. While our general framework could be applied to other scenarios, we cannot use the same set of features for just any country or subject. This is because academic performance is also reliant on factors such as culture and importance placed on academics in other countries. Our study can be enhanced by coming up with new feature sets and using the results to compare and contrast different cultures and the emphasis they place on academics. This allows us to gain a better understanding of how academic importance varies throughout the world.
+Even though our results were fairly accurate, it could be significantly improved through the use of a larger data set or a more robust set of features. While our general framework could be applied to other schools and countries, we cannot use the same set of features for just any country or subject. This is because academic performance is also reliant on factors such as culture and the importance placed on academics in other countries. Our study can be enhanced by using the same framework in multiple countries and schools to gain a better understanding of what factors influence academic success.
 
 %----------------------------------------------------------------------------------------
 %	REFERENCE LIST
 %----------------------------------------------------------------------------------------
 
 \begin{thebibliography}{99} % Bibliography - this is intentionally simple in this template
+\bibitem{}LynnSpeiserPersonEnvelope, Jaime, and Michael E.MillerEnvelope. “A Comparison of Random Forest Variable Selection Methods for Classification Prediction Modeling.” Expert Systems with Applications, Pergamon, 23 May 2019, https://www.sciencedirect.com
 
-\bibitem[Figueredo and Wolf, 2009]{Figueredo:2009dg}
-Figueredo, A.~J. and Wolf, P. S.~A. (2009).
-\newblock Assortative pairing and life history strategy - a cross-cultural
-  study.
-\newblock {\em Human Nature}, 20:317--330.
- 
+\bibitem{}Rao, Medabalimi. “Texture Classification Using Minkowski Distance Measure-Based Clustering for Feature Selection.”, https://www.spiedigitallibrary.org/journal-of-electronic-imaging. Accessed 9 Dec. 2022.
+
+\bibitem{}“Alcohol Effects On Study | Kaggle.” Kaggle: Your Machine Learning and Data Science Community, https://www.kaggle.com/datasets/whenam ancodes/alcohol-effects-on-study Accessed 9 Dec. 2022.
 \end{thebibliography}
 
 %----------------------------------------------------------------------------------------
