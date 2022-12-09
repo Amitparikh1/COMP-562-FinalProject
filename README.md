@@ -9,24 +9,22 @@ Classification is one of the fields at the forefront of machine learning researc
 
 <b><a href="Report.pdf">View Full Report</a></b>
 
-## What does each model do?
+## Contents
 
-### [Logistic Regression](Final_Project.ipynb)
+### [Data Exploration, Cleaning, Pre-Processing](Data Exploration & Preparation.ipynb)
 
 Logistic Regression Model
 
-### [Random Forest Classifier](Final_Project.ipynb)
+### [Logistic Regression](Logistic Regression Classifier.ipynb)
+
+Logistic Regression Model
+
+### [Random Forest Classifier](Random Forest Classifier.ipynb)
 
 Random Forest Model
 
-### [KNN Classifier](Final_Project.ipynb)
+### [KNN Classifier](KNN Classifier.ipynb)
 
 KNN Model
 
-### [Final Model](Final_Project.ipynb)
 
-Final Model...
-
-### [Visualizations](Final_Project.ipynb)
-
-The notebook, <a href="Visualizations.ipynb">Visualizations.ipynb</a>, contains all of the graphs found in the <a href="Report.pdf">report</a> as well as a summary and diagram of the different models.
