@@ -11,19 +11,19 @@ Classification is one of the fields at the forefront of machine learning researc
 
 ## Contents
 
-### [Data Exploration, Cleaning, Pre-Processing](Data Exploration & Preparation.ipynb)
+### [Data Exploration, Cleaning, Pre-Processing](Data_Exploration_Preparation.ipynb)
 
 Logistic Regression Model
 
-### [Logistic Regression](Logistic Regression Classifier.ipynb)
+### [Logistic Regression](Logistic_Regression_Classifier.ipynb)
 
 Logistic Regression Model
 
-### [Random Forest Classifier](Random Forest Classifier.ipynb)
+### [Random Forest Classifier](Random_Forest_Classifier.ipynb)
 
 Random Forest Model
 
-### [KNN Classifier](KNN Classifier.ipynb)
+### [KNN Classifier](KNN_Classifier.ipynb)
 
 KNN Model
 
